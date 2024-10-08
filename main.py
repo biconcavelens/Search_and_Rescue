@@ -37,7 +37,6 @@ for img in image_paths:
     lower_brown = np.array([10, 100, 20])
     upper_brown = np.array([20, 255, 200])
 
-
     #masks for green and brown
     green_mask = cv2.inRange(hsv_image, lower_green, upper_green)
     brown_mask = cv2.inRange(hsv_image, lower_brown, upper_brown)
@@ -56,7 +55,6 @@ for img in image_paths:
     red_mask2 = cv2.inRange(hsv_image, lower_red2, upper_red2)
     red_mask = cv2.bitwise_or(red_mask1, red_mask2)
     blue_mask = cv2.inRange(hsv_image, lower_blue, upper_blue)
-
 
     # Create a copy of the original image to modify
     result_image = image.copy()
@@ -81,19 +79,13 @@ for img in image_paths:
 
     #correcting the yellow mask to include the holes
     yellow_mask = cv2.inRange(result_image, yellow, yellow)
-    # Saving the result to a file
-    ##cv2.imwrite('no_triangles.png', result_image)
+    #cv2.imwrite('no_triangles.png', result_image) #save if necessary to see masking
 
     # count for triangles
     red_on_brown = 0
     red_on_green = 0
     blue_on_brown = 0
     blue_on_green = 0
-
-    ###for debugging
-    #print(blue_centroids)
-    #plt.imshow(yellow_mask, cmap='gray')
-    #plt.show()
 
     #contouring for red triangles on burnt (yellow) region
     contours, _ = cv2.findContours(cv2.bitwise_and(yellow_mask,red_mask),cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -123,7 +115,6 @@ for img in image_paths:
     for contour in contours:
         approx = cv2.approxPolyDP(contour, 0.02 * cv2.arcLength(contour, True), True)
         blue_on_green+=1
-
     
     this=[red_on_brown+blue_on_brown,red_on_green+blue_on_green]
     n_houses.append(this)
