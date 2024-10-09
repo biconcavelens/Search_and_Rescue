@@ -92,28 +92,28 @@ for img in image_paths:
     #looping through the contours
     for contour in contours:
         #approximate the contour
-        approx = cv2.approxPolyDP(contour, 0.02 * cv2.arcLength(contour, True), True)
+        #approx = cv2.approxPolyDP(contour, 0.02 * cv2.arcLength(contour, True), True)
         red_on_brown+=1
 
     #contouring for blue triangles on burnt (yellow) region
     contours, _ = cv2.findContours(cv2.bitwise_and(yellow_mask,blue_mask),cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     
     for contour in contours:
-        approx = cv2.approxPolyDP(contour, 0.02 * cv2.arcLength(contour, True), True)
+        #approx = cv2.approxPolyDP(contour, 0.02 * cv2.arcLength(contour, True), True)
         blue_on_brown+=1
 
     #contouring for red triangles on green region
     contours, _ = cv2.findContours(cv2.bitwise_and(cyan_mask,red_mask),cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     for contour in contours:
-        approx = cv2.approxPolyDP(contour, 0.02 * cv2.arcLength(contour, True), True)
+        #approx = cv2.approxPolyDP(contour, 0.02 * cv2.arcLength(contour, True), True)
         red_on_green+=1
 
     #contouring for blue triangles on green region
     contours, _ = cv2.findContours(cv2.bitwise_and(cyan_mask,blue_mask),cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     for contour in contours:
-        approx = cv2.approxPolyDP(contour, 0.02 * cv2.arcLength(contour, True), True)
+        #approx = cv2.approxPolyDP(contour, 0.02 * cv2.arcLength(contour, True), True)
         blue_on_green+=1
     
     this=[red_on_brown+blue_on_brown,red_on_green+blue_on_green]
